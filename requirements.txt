@@ -11,3 +11,6 @@ langchain
 OpenAIEmbeddings
 FAISS
 HuggingFaceEmbeddings
+ChatOpenAI
+PromptTemplate
+load_qa_chain
