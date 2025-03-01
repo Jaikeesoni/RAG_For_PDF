@@ -1,7 +1,7 @@
 streamlit
 os
 time
-pathlib
+Path
 numpy
 PyPDF2
 langchain
