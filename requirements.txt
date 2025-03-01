@@ -6,3 +6,4 @@ numpy
 PyPDF2
 langchain
 tempfile
+warnings
