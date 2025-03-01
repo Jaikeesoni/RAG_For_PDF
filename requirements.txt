@@ -14,3 +14,4 @@ HuggingFaceEmbeddings
 ChatOpenAI
 PromptTemplate
 load_qa_chain
+HuggingFaceHub
