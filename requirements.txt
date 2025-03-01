@@ -3,7 +3,7 @@ os
 time
 Path
 numpy
-PyPDF2
-langchain
+PdfReader
+RecursiveCharacterTextSplitter
 tempfile
 warnings
