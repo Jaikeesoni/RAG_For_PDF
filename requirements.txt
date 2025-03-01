@@ -8,3 +8,6 @@ RecursiveCharacterTextSplitter
 tempfile
 warnings
 langchain
+OpenAIEmbeddings
+FAISS
+HuggingFaceEmbeddings
