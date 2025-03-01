@@ -28,7 +28,7 @@ with st.sidebar:
     
     # API key input based on provider
     if model_provider == "OpenAI":
-        api_key = "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"#st.text_input("Enter your OpenAI API Key:", type="password")
+        api_key = st.text_input("Enter your OpenAI API Key:", type="password")
         if api_key:
             os.environ["OPENAI_API_KEY"] = api_key
             st.success("API key set!")
