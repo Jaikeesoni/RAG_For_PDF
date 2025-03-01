@@ -15,3 +15,4 @@ ChatOpenAI
 PromptTemplate
 load_qa_chain
 HuggingFaceHub
+openai==0.28.0
