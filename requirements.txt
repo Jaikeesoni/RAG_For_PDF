@@ -1,0 +1,9 @@
+streamlit
+os
+tempfile
+time
+pathlib
+numpy
+PyPDF2
+langchain
+warnings
