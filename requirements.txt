@@ -11,11 +11,13 @@ ChatOpenAI
 PromptTemplate
 OpenAIEmbeddings
 FAISS
+FAISS.cpu
 langchain_community
 Path
 time
 tempfile
 os
 OpenAIEmbeddings
+warnings
 
 
