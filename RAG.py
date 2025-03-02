@@ -7,6 +7,9 @@ import numpy as np
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import warnings
+from langchain_openai import ChatOpenAI
+from langchain.chains.question_answering import load_qa_chain
+from langchain.prompts import PromptTemplate
 warnings.filterwarnings('ignore')
 
 # Add a model selector for flexibility
@@ -105,25 +108,8 @@ def process_documents(text_data, model_provider):
             return vectorstore
         except Exception as e:
             st.error(f"Error with OpenAI embeddings: {str(e)}")
-            st.info("Consider using the Hugging Face option which doesn't require an API key.")
             return None
-    else:  # Hugging Face
-        try:
-            from langchain_community.embeddings import HuggingFaceEmbeddings
-            from langchain_community.vectorstores import FAISS
-            
-            # Use a smaller embedding model that works offline
-            embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-            
-            texts = [doc["text"] for doc in documents]
-            metadatas = [doc["metadata"] for doc in documents]
-            
-            vectorstore = FAISS.from_texts(texts=texts, embedding=embeddings, metadatas=metadatas)
-            return vectorstore
-        except Exception as e:
-            st.error(f"Error with Hugging Face embeddings: {str(e)}")
-            st.info("Try installing with: pip install sentence-transformers")
-            return None
+          
 
 # Function to ask a question and get an answer
 def ask_question(vectorstore, question, model_provider):
@@ -150,17 +136,14 @@ def ask_question(vectorstore, question, model_provider):
     
     if model_provider == "OpenAI":
         try:
-            from langchain_openai import ChatOpenAI
-            from langchain.chains.question_answering import load_qa_chain
-            from langchain.prompts import PromptTemplate
-            
+                        
             PROMPT = PromptTemplate(
                 template=prompt_template, 
                 input_variables=["context", "question"]
             )
             
             # Set up the question-answering chain
-            llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+            llm = ChatOpenAI(temperature=0, model_name="gpt-4o-mini")
             chain = load_qa_chain(llm, chain_type="stuff", prompt=PROMPT)
             
             # Get the answer
@@ -168,33 +151,12 @@ def ask_question(vectorstore, question, model_provider):
             answer = response["output_text"]
         except Exception as e:
             st.error(f"Error with OpenAI processing: {str(e)}")
-            st.info("Consider using the Hugging Face option which doesn't require an API key.")
             
             # Fallback to a basic response
             context_texts = [doc.page_content for doc in docs]
             combined_context = "\n".join(context_texts)
             answer = f"Couldn't process with OpenAI due to API error. Here are the relevant document sections:\n\n{combined_context[:1000]}..."
-    else:  # Hugging Face
-        try:
-            from langchain_community.llms import HuggingFaceHub
-            from langchain.chains.question_answering import load_qa_chain
-            from langchain.prompts import PromptTemplate
-            
-            # For offline use, we'll just provide the relevant passages
-            context_texts = [doc.page_content for doc in docs]
-            combined_context = "\n".join(context_texts)
-            
-            answer = f"Here are the most relevant sections for your question:\n\n{combined_context}"
-            
-            # Note: For a complete solution, you would need to set up HuggingFaceHub or use a local model
-            # This is simplified for demonstration purposes
-        except Exception as e:
-            st.error(f"Error with Hugging Face processing: {str(e)}")
-            
-            # Just return the context as fallback
-            context_texts = [doc.page_content for doc in docs]
-            combined_context = "\n".join(context_texts)
-            answer = f"Relevant document sections:\n\n{combined_context[:1000]}..."
+          
     
     # Extract source information
     sources = []
