@@ -6,7 +6,7 @@ pandas
 tiktoken
 langchain
 langchain_openai
-ChatOpenAI
+langchain-openai==0.3.7
 PromptTemplate
 OpenAIEmbeddings
 FAISS
