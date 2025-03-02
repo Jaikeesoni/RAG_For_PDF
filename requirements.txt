@@ -12,4 +12,9 @@ PromptTemplate
 OpenAIEmbeddings
 FAISS
 langchain_community
+Path
+time
+tempfile
+os
+PyPDF2
 
