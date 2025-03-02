@@ -6,7 +6,6 @@ pandas
 tiktoken
 langchain
 langchain_openai
-RecursiveCharacterTextSplitter
 ChatOpenAI
 PromptTemplate
 OpenAIEmbeddings
@@ -19,5 +18,6 @@ tempfile
 os
 OpenAIEmbeddings
 warnings
+langchain-text-splitters==0.3.6
 
 
