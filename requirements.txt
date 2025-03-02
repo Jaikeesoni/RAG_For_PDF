@@ -5,7 +5,7 @@ scikit-learn
 pandas
 tiktoken
 langchain-openai==0.3.7
-PromptTemplate
+langchain.prompts
 OpenAIEmbeddings
 FAISS
 FAISS.cpu
