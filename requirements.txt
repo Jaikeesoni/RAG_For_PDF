@@ -4,8 +4,6 @@ numpy
 scikit-learn
 pandas
 tiktoken
-langchain
-langchain_openai
 langchain-openai==0.3.7
 PromptTemplate
 OpenAIEmbeddings
@@ -19,5 +17,7 @@ os
 OpenAIEmbeddings
 warnings
 langchain-text-splitters==0.3.6
+langchain==0.3.19
+langchain-community==0.3.18
 
 
