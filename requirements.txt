@@ -16,5 +16,6 @@ Path
 time
 tempfile
 os
-PyPDF2
+OpenAIEmbeddings
+
 
